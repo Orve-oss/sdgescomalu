@@ -20,11 +20,30 @@ class Client extends Model
     public static function addClient($data){
 
         $client = new Self();
-        $client->Rais_Soc = $data->Rais_Soc;
-        $client->Contact = $data->Contact;
-        $client->Adresse = $data->Adresse;
-        $client->Actif = $data->Actif;
-        $client->created_date = $data->created_date;
+        $client->Rais_Soc = $data['Rais_Soc'];
+        $client->Contact = $data['Contact'];
+        $client->Adresse = $data['Adresse'];
+        // $client->Actif = $data['Actif'];
+        // $client->created_date = $data['created_date'];
         $client->save();
+    }
+    public static function getclient($id){
+
+        return Self::find($id);
+    }
+
+
+    public static function updateClient($data){
+
+        $client = Self::find($data['id']);
+        $client->Rais_Soc = $data['Rais_Soc'];
+        $client->Contact = $data['Contact'];
+        $client->Adresse = $data['Adresse'];
+        $client->Actif = $data['Actif'];
+        $client->created_date = $data['created_date'];
+        $client->save();
+    }
+    public static function deleteClient($id){
+        Self::find($id)->delete();
     }
 }

@@ -35,8 +35,8 @@ class ClientController extends Controller
             'Rais_Soc'=>'required',
             'Contact'=>'required',
             'Adresse'=>'required',
-            'Actif'=>'required',
-            'created_date'=>'required',
+            'Actif'=>'nullable',
+            'created_date'=>'nullable',
         ]);
         if ($request->has('Actif') && empty($request->get('Actif'))) {
             $data['Actif'] = 1;
@@ -64,24 +64,34 @@ class ClientController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Client $client)
+    public function edit($id)
     {
-        //
+        $client=Client::getclient($id);
+        return view('clients.index',compact('client'));
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $data=$request->validate([
+            'Rais_Soc'=>'required',
+            'Contact'=>'required',
+            'Adresse'=>'required',
+
+        ]);
+        Client::updateClient($data);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Client $client)
+    public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+        $client->delete();
+        // Client::deleteClient($id);
+        return redirect('/clients');
+        // return response()->json(['message' => 'Client deleted successfully']);
     }
 }

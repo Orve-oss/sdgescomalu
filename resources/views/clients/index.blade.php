@@ -118,12 +118,17 @@
                                                 <td>{{ $client->Actif }}</td>
                                                 <td>{{ $client->created_date }}</td>
                                                 <td>
-                                                    <a href="#" type="button"
-                                                        class="btn btn-primary waves-effect waves-light"><i
+                                                    <a href="{{ route('clients.edit', $client->id) }}" type="button"
+                                                        class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#staticBackdropEdit"><i
                                                             class="ri-pencil-line "></i></a>
-                                                    <a href="#" type="button"
-                                                        class="btn btn-danger waves-effect waves-light"><i
-                                                            class="ri-close-line "></i></a>
+                                                            <form action="{{ route('clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce client ?')" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger waves-effect waves-light">
+                                                                    <i class="ri-close-line"></i>
+                                                                </button>
+                                                            </form>
+
 
                                                 </td>
                                             </tr>
@@ -132,6 +137,61 @@
 
                                     </tbody>
                                 </table>
+                                {{-- <a href="" type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add</a> --}}
+                                <div class="modal fade" id="staticBackdropEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Modifier le client</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="needs-validation" >
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="validationCustom01" class="form-label">Raison sociale :</label>
+                                                                <input type="text" class="form-control" id="validationCustom01"
+                                                                    placeholder="Entrez la raison sociale" name="Rais_Soc" value="{{ $client->Rais_Soc }}" required>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="validationCustom01" class="form-label">Contact :</label>
+                                                                <input type="text" class="form-control" id="validationCustom01"
+                                                                    placeholder="Entrez le contact" name="Contact" value="{{ $client->Contact }}" required>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="mb-3">
+                                                                <label for="validationCustom01" class="form-label">Adresse :</label>
+                                                                <input type="text" class="form-control" id="validationCustom01"
+                                                                    placeholder="Entrez l'adresse" name="Adresse" value="{{ $client->Adresse }}" required>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div> <!-- end col -->
