@@ -32,7 +32,8 @@ Route::middleware('auth')->group(function () {
 
 Route::controller(ClientController::class)->group(function () {
     Route::get('/clients', 'index')->name('clients.index');
-    Route::get('/clients/{client}', 'show')->name('clients.show');
+    Route::get('/clients/ajouter', 'create')->name('clients.create');
+    Route::post('/clients/ajout', 'store')->name('clients.store');
 });
 
 require __DIR__.'/auth.php';

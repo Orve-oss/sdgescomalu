@@ -23,7 +23,74 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+
                             <div class="card-body">
+                                <div class="col-sm-6 col-md-4 col-xl-3">
+                                    <div class="my-4 text-center">
+
+                                        <!-- Small modal -->
+                                        <a href="" type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add</a>
+                                        {{-- <a href="{{ route('clients.create') }}" type="button" class="btn btn-primary w-xs waves-effect waves-light">Add</a> --}}
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Creer un nouveau client</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="needs-validation" action="/clients/ajout" method="POST">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mb-3">
+                                                                    <label for="validationCustom01" class="form-label">Raison sociale :</label>
+                                                                    <input type="text" class="form-control" id="validationCustom01"
+                                                                        placeholder="Entrez la raison sociale" name="Rais_Soc" value="Wequipu" required>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mb-3">
+                                                                    <label for="validationCustom01" class="form-label">Contact :</label>
+                                                                    <input type="text" class="form-control" id="validationCustom01"
+                                                                        placeholder="Entrez le contact" name="Contact" required>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="mb-3">
+                                                                    <label for="validationCustom01" class="form-label">Adresse :</label>
+                                                                    <input type="text" class="form-control" id="validationCustom01"
+                                                                        placeholder="Entrez l'adresse" name="Adresse" required>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-light waves-effect" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary waves-effect waves-light">Save</button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
                                 <h4 class="card-title">Liste des clients</h4>
 
@@ -45,18 +112,18 @@
                                         @foreach ($clients as $key => $client)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $client->Rais_soc }}</td>
+                                                <td>{{ $client->Rais_Soc }}</td>
                                                 <td>{{ $client->Contact }}</td>
                                                 <td>{{ $client->Adresse }}</td>
                                                 <td>{{ $client->Actif }}</td>
                                                 <td>{{ $client->created_date }}</td>
                                                 <td>
                                                     <a href="#" type="button"
-                                                        class="btn btn-success waves-effect waves-light"><i
-                                                            class="ri-pencil-line align-middle ms-2"></a>
+                                                        class="btn btn-primary waves-effect waves-light"><i
+                                                            class="ri-pencil-line "></i></a>
                                                     <a href="#" type="button"
-                                                        class="btn btn-success waves-effect waves-light"><i
-                                                            class="ri-trash-line align-middle ms-2"></a>
+                                                        class="btn btn-danger waves-effect waves-light"><i
+                                                            class="ri-close-line "></i></a>
 
                                                 </td>
                                             </tr>

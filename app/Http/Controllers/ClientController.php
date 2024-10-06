@@ -22,7 +22,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('clients.create');
     }
 
     /**
@@ -30,7 +30,27 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $data = $request->validate([
+            'Rais_Soc'=>'required',
+            'Contact'=>'required',
+            'Adresse'=>'required',
+            'Actif'=>'required',
+            'created_date'=>'required',
+        ]);
+        if ($request->has('Actif') && empty($request->get('Actif'))) {
+            $data['Actif'] = 1;
+        }
+        if ($request->has('created_date') && empty($request->get('created_date'))) {
+            $data['created_date'] = now();
+        }
+        Client::addClient($data);
+        return redirect('/clients')->with('success', 'Client created successfully');
+
+        // return response()->json([
+        //     'message' => 'Client created successfully',
+        //     'data' => $data
+        // ]);
     }
 
     /**

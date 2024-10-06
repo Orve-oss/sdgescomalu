@@ -16,4 +16,15 @@ class Client extends Model
         // return Self::all();
         return Self::latest()->get();
     }
+
+    public static function addClient($data){
+
+        $client = new Self();
+        $client->Rais_Soc = $data->Rais_Soc;
+        $client->Contact = $data->Contact;
+        $client->Adresse = $data->Adresse;
+        $client->Actif = $data->Actif;
+        $client->created_date = $data->created_date;
+        $client->save();
+    }
 }
