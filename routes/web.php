@@ -35,7 +35,7 @@ Route::controller(ClientController::class)->group(function () {
     Route::get('/clients/ajouter', 'create')->name('clients.create');
     Route::post('/clients/ajout', 'store')->name('clients.store');
     Route::get('/edit/{id}', 'edit')->name('clients.edit');
-    Route::post('/update/{id}', 'update')->name('clients.update');
+    Route::post('/update', 'update')->name('clients.update');
     Route::delete('/delete/{id}', 'destroy')->name('clients.destroy');
 });
 

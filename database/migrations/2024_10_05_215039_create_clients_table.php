@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('Contact');
             $table->string('Adresse');
             $table->boolean('Actif')->default(1);
-            $table->date('created_date');
+            $table->date('created_date')->default(now());
             $table->timestamps();
         });
     }

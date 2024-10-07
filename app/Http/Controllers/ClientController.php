@@ -67,20 +67,35 @@ class ClientController extends Controller
     public function edit($id)
     {
         $client=Client::getclient($id);
-        return view('clients.index',compact('client'));
+        return view('clients.edit',compact('client'));
     }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Client $client)
     {
-        $data=$request->validate([
+        $request->validate([
             'Rais_Soc'=>'required',
             'Contact'=>'required',
             'Adresse'=>'required',
-
+            'created_date'=>'required',
         ]);
-        Client::updateClient($data);
+        $client = Client::find($request->id);
+        $client->Rais_Soc = $request->Rais_Soc;
+        $client->Contact = $request->Contact;
+        $client->Adresse = $request->Adresse;
+        $client->created_date = $request->created_date;
+        $client->update();
+        // $data = $request->validate([
+        //     'Rais_Soc'=>'nullable',
+        //     'Contact'=>'nullable',
+        //     'Adresse'=>'nullable',
+
+        // ]);
+        // $data['id'] = $client->id;
+
+        // Client::updateClient($data);
+        return redirect('/clients');
     }
 
     /**
