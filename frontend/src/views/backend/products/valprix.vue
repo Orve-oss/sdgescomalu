@@ -39,8 +39,8 @@ const searchTerm = ref("");
 
 
 const clicko = (data) => {
-    valprixStore.ligneproduit.designation = data.designation;
-    valprixStore.ligneproduit.produit_id = data.produit_id;
+    valprixStore.designation = data.designation;
+    valprixStore.produit_id = data.produit_id;
 
 }
 </script>
@@ -88,53 +88,49 @@ const clicko = (data) => {
                 <!-- Striped Table -->
                 <BaseBlock title="Detail">
 
-                        <div class="mb-4">
+                    <div class="mb-4">
 
-                            <select class="form-select" id="example-select" name="example-select"
-                                v-model="valprixStore.defprix_id">
-                                <option selected>Open this select menu</option>
-                                <option v-for="defprix in valprixStore.defprix.data" :key="defprix.id"
-                                    :value="defprix.id">
-                                    {{
-                                        defprix.nom }}</option>
+                        <select class="form-select" id="example-select" name="example-select"
+                            v-model="valprixStore.defprix_id">
+                            <option selected>Open this select menu</option>
+                            <option v-for="defprix in valprixStore.defprix.data" :key="defprix.id" :value="defprix.id">
+                                {{
+                                    defprix.nom }}</option>
 
-                            </select>
+                        </select>
 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-xl-5">
+                            <div class="card justify-content-center">
+                                <p>{{ valprixStore.designation }}</p>
+                            </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-lg-4 col-xl-5">
-                                <div class="form mb-2 mx-1">
-                                    <input type="text" class="form-control" id="example-text-input-floating"
-                                        :value="valprixStore.ligneproduit.designation" disabled  />
-
-                                </div>
-                                 <input type="hidden" v-model="valprixStore.produit_id">
+                        
+                        <div class="col-lg-5 col-xl-3">
+                            <div class="form mb-1">
+                                <input type="number" class="form-control" id="pvte" name="pvte" placeholder="Ex: 150"
+                                    v-model="valprixStore.pvte" />
 
                             </div>
-                            <div class="col-lg-5 col-xl-3">
-                                <div class="form mb-1">
-                                    <input type="number" class="form-control" id="pvte"
-                                        name="pvte" placeholder="Ex: 150" v-model="valprixStore.pvte"/>
-
+                        </div>
+                        <div class="col-lg-5 col-xl-3">
+                            <div class="row items-push text-center text-sm-start mb-0">
+                                <div class="col-sm-6 col-xl-4 me-3">
+                                    <button type="button" @click="valprixStore.valprix" class="btn rounded-0 btn-dark">
+                                        Valider
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="col-lg-5 col-xl-3">
-                                <div class="row items-push text-center text-sm-start mb-0">
-                                    <div class="col-sm-6 col-xl-4 me-3">
-                                        <button type="button" @click="valprixStore.valprix" class="btn rounded-0 btn-dark">
-                                            Valider
-                                        </button>
-                                    </div>
-                                    <div class="col-sm-6 col-xl-4">
-                                        <button type="button" class="btn rounded-0 btn-light"
-                                            @click="valprixStore.clearval">
-                                            Annuler
-                                        </button>
-                                    </div>
+                                <div class="col-sm-6 col-xl-4">
+                                    <button type="button" class="btn rounded-0 btn-light"
+                                        @click="valprixStore.clearval">
+                                        Annuler
+                                    </button>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
 
                 </BaseBlock>

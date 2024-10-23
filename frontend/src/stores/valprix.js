@@ -5,9 +5,10 @@ import "vue3-toastify/dist/index.css";
 
 export const useValprixStore = defineStore("valprix", {
     state: () => ({
-        produit_id: null,
-        defprix_id: null,
+        produit_id: '',
+        defprix_id: '',
         pvte: '',
+        designation: '',
         categories: {
             data: [],
             id: null,
@@ -20,11 +21,7 @@ export const useValprixStore = defineStore("valprix", {
             loading: false,
             errors: [],
         },
-        ligneproduit:{
-            produit_id: '',
 
-            designation: '',
-        },
         newValprix: {
             pvte: '',
             defprix_id: '',
@@ -79,7 +76,7 @@ export const useValprixStore = defineStore("valprix", {
             const data = new FormData();
             data.append('pvte', this.pvte);
             data.append('defprix_id', this.defprix_id);
-            data.append('produit_id', this.ligneproduit.produit_id);
+            data.append('produit_id', this.produit_id);
             try {
                 const resp = await axios.post(`http://sdgescomalu.test/api/valeurprix/ajouter`, data);
                 if (resp.data.message) {
@@ -95,6 +92,9 @@ export const useValprixStore = defineStore("valprix", {
                 }
             } catch (error) {
                 console.log(error);
+                toast.error('Erreur lors de l\'ajout', {
+                    autoClose: 1000,
+                })
             }
         },
 
