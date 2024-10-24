@@ -16,7 +16,8 @@ export const useValprixStore = defineStore("valprix", {
         },
         produits:[],
 
-        valprix: {
+        Valprix: {
+            id: '',
             data: [],
             loading: false,
             errors: [],
@@ -64,9 +65,9 @@ export const useValprixStore = defineStore("valprix", {
         async getValprix() {
             try {
                 const response = await axios.get(
-                    `http://sdgescomalu.test/api/valprix`
+                    `http://sdgescomalu.test/api/valeurprix`
                 );
-                this.valprix.data = response.data.valprix;
+                this.Valprix.data = response.data.valprix;
             } catch (error) {
                 console.log(error);
             }
@@ -93,6 +94,50 @@ export const useValprixStore = defineStore("valprix", {
             } catch (error) {
                 console.log(error);
                 toast.error('Erreur lors de l\'ajout', {
+                    autoClose: 1000,
+                })
+            }
+        },
+
+        async getOneValprix(id){
+            try{
+                this.clearval()
+                this.id = id
+                const data = await axios.get(`http://sdgescomalu.test/api/valeurprix/show/`+id)
+               this.Valprix.data.id = data.data.valprix.id
+            }
+            catch(error){
+                console.log(error);
+            }
+        },
+
+        async updateprix(id){
+            const data = {
+                pvte: this.pvte,
+                defprix_id: this.defprix_id,
+                produit_id: this.produit_id
+            };
+
+            // const data = new FormData();
+            // data.append('pvte', this.pvte);
+            // data.append('defprix_id', this.defprix_id);
+            // data.append('produit_id', this.produit_id);
+            try {
+                const resp = await axios.put(`http://sdgescomalu.test/api/valeurprix/change/`+id, data);
+                if (resp.data.message) {
+                    toast.success('Prix modifie avec success', {
+                        autoClose: 1000,
+                    })
+                    this.getValprix();
+                    this.clearval();
+                } else {
+                    toast.error('Erreur lors de la modification', {
+                        autoClose: 1000,
+                    })
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error('Erreur lors de la modification', {
                     autoClose: 1000,
                 })
             }
@@ -137,11 +182,26 @@ export const useValprixStore = defineStore("valprix", {
         },
 
         clearval() {
-            this.newValprix = {
-                pvte: '',
-                produit_id: null
-            };
+            this.pvte = '';
+            this.defprix_id = '';
+            this.produit_id = '';
         },
+
+        getIndexListePrix(idpdt) {
+            let Index = this.Valprix.data.findIndex(
+                ligneprix => ligneprix.produit_id === idpdt
+            )
+            let i = Index >= 0 ? Index : -1
+            return i
+        },
+        getIndexPrix(idpdt, iddef) {
+            let Index = this.Valprix.data.findIndex(
+                ligneprix => ligneprix.produit_id === idpdt && ligneprix.defprix_id === iddef
+            )
+            let i = Index >= 0 ? Index : -1
+            return i
+
+        }
 
 
     },

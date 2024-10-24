@@ -28,7 +28,7 @@ class Valprix extends Model
 
     public static function getallvalprix()
     {
-        return Self::all()->with('produit', 'defprix');
+        return Self::all()->load('produit', 'defprix');
     }
 
     public static function addvalprix($data)
@@ -43,5 +43,12 @@ class Valprix extends Model
     public static function getvalprix($id)
     {
         return Self::find($id);
+    }
+
+    public static function updatevalprix($data, $id)
+    {
+        Self::where('id', $id)->update([
+            'pvte' => $data['pvte'],
+        ]);
     }
 }

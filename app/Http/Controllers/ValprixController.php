@@ -13,7 +13,7 @@ class ValprixController extends Controller
     public function all()
     {
         $valprix = Valprix::getallvalprix();
-        return response()->json($valprix);
+        return response()->json(['valprix' => $valprix]);
     }
 
     /**
@@ -41,9 +41,10 @@ class ValprixController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Valprix $valprix)
+    public function show($id)
     {
-        //
+        $valprix = Valprix::getvalprix($id);
+        return response()->json(['valprix' => $valprix]);
     }
 
     /**
@@ -57,9 +58,14 @@ class ValprixController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Valprix $valprix)
+    public function change(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+
+            'pvte'=>'required',
+        ]);
+        Valprix::updatevalprix($data, $id);
+        return response()->json(['message' => 'prix modifie avec succes']);
     }
 
     /**

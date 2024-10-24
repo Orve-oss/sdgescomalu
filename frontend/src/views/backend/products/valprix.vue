@@ -1,6 +1,8 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
 import { useValprixStore } from "@/stores/valprix";
+// import { toast } from "vue3-toastify";
+// import "vue3-toastify/dist/index.css";
 
 const valprixStore = useValprixStore();
 // const selectedDesignation = ref('');
@@ -8,7 +10,7 @@ const valprixStore = useValprixStore();
 onMounted(() => {
     valprixStore.getCategorie();
     valprixStore.getDefprix();
-    // valprixStore.getProduitByCategorie(valprixStore.categories.id);
+    valprixStore.getValprix();
 })
 // Example data
 const produits = reactive([
@@ -23,6 +25,10 @@ const produit = ref([
     {
         label: "Designation",
         field: "produit.designation",
+    },
+    {
+        label: "Definition de prix",
+        field: "defprix.nom",
     },
     {
         label: "Prix",
@@ -40,7 +46,29 @@ const searchTerm = ref("");
 
 const clicko = (data) => {
     valprixStore.designation = data.designation;
-    valprixStore.produit_id = data.produit_id;
+    valprixStore.produit_id = data.id;
+    console.log(data);
+
+};
+const addprix = () => {
+    let Index = valprixStore.getIndexListePrix(valprixStore.produit_id);
+    console.log(Index);
+    console.log(valprixStore.produit_id);
+    if (Index >= 0) {
+        const id = valprixStore.Valprix.data[Index].id;
+        let pvte = valprixStore.pvte;
+        valprixStore.updateprix(id, pvte);
+        console.log(valprixStore.Valprix.data[Index].id);
+        console.log(valprixStore.pvte);
+
+
+    } else {
+        valprixStore.valprix({
+            produit_id: valprixStore.produit_id,
+            defprix_id: valprixStore.defprix_id,
+            pvte: valprixStore.pvte
+        })
+    }
 
 }
 </script>
@@ -107,7 +135,7 @@ const clicko = (data) => {
                                 <p>{{ valprixStore.designation }}</p>
                             </div>
                         </div>
-                        
+
                         <div class="col-lg-5 col-xl-3">
                             <div class="form mb-1">
                                 <input type="number" class="form-control" id="pvte" name="pvte" placeholder="Ex: 150"
@@ -118,7 +146,7 @@ const clicko = (data) => {
                         <div class="col-lg-5 col-xl-3">
                             <div class="row items-push text-center text-sm-start mb-0">
                                 <div class="col-sm-6 col-xl-4 me-3">
-                                    <button type="button" @click="valprixStore.valprix" class="btn rounded-0 btn-dark">
+                                    <button type="button" @click="addprix" class="btn rounded-0 btn-dark">
                                         Valider
                                     </button>
                                 </div>
@@ -135,7 +163,7 @@ const clicko = (data) => {
 
                 </BaseBlock>
 
-                <!-- <vue-good-table :columns="produit" :rows="valprixStore.valprix.data" styleClass="vgt-table mt-3 "
+                <vue-good-table :columns="produit" :rows="valprixStore.Valprix.data" styleClass="vgt-table mt-3 "
                     max-heigth="500px" max-width="100%" :fixed-header="true" theme="black-rhino">
 
                     <template v-slot:table-row="props">
@@ -149,7 +177,7 @@ const clicko = (data) => {
                         </span>
                     </template>
 
-                </vue-good-table> -->
+                </vue-good-table>
 
 
             </div>
