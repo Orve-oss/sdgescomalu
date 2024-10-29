@@ -10,10 +10,7 @@ const colums = ref([
         label: 'designation',
         field: 'designation',
     },
-    {
-        label: 'fournisseur',
-        field: 'fournisseur.rais_soc',
-    },
+
     {
         label: 'categorie',
         field: 'categorie.libelle',
@@ -51,7 +48,7 @@ const deleteProduit = async (id) => {
 onMounted(() => {
     produitStore.getproduit();
     produitStore.getCategorie();
-    produitStore.getFournisseur();
+
 })
 </script>
 
@@ -132,20 +129,7 @@ onMounted(() => {
                                             </select>
 
                                         </div>
-                                        <div class="mb-4">
-                                            <label class="form-label" for="example-text-input">Fournisseur<span
-                                                    class="text-danger">*</span> :</label>
-                                            <select class="form-select" id="example-select" name="example-select"
-                                                v-model="produitStore.newProduit.fournisseur_id" placeholder="Choisissez une categorie">
-                                                <option selected>Open this select menu</option>
-                                                <option v-for="fournisseur in produitStore.produits.allfournisseur"
-                                                    :key="fournisseur.id" :value="fournisseur.id">
-                                                    {{ fournisseur.rais_soc }}
-                                                </option>
 
-                                            </select>
-
-                                        </div>
 
 
 
@@ -220,23 +204,7 @@ onMounted(() => {
                                             </select>
 
                                         </div>
-                                        <div class="mb-4">
-                                            <label class="form-label" for="example-text-input">Fournisseur<span
-                                                    class="text-danger">*</span> :</label>
-                                            <select class="form-select" id="example-select" name="example-select"
-                                                v-model="produitStore.newProduit.fournisseur_id">
-                                                <option selected>Open this select menu</option>
-                                                <option v-for="fournisseur in produitStore.produits.allfournisseur"
-                                                    :key="fournisseur.id" :value="fournisseur.id">
-                                                    {{ fournisseur.rais_soc }}
-                                                </option>
-
-                                            </select>
-
-                                        </div>
-
-
-
+                                        
                                     </div>
                                     <div class="col-lg-6 col-xl-6">
                                         <div class="mb-4">

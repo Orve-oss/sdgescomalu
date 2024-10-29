@@ -41,6 +41,7 @@ const BackendClients = () => import("@/views/backend/clients/listClient.vue");
 const BackendProduits = () => import("@/views/backend/products/listProduit.vue");
 const BackendDefprix = () => import("@/views/backend/products/defprix.vue");
 const BackendValprix = () => import("@/views/backend/products/valprix.vue");
+const BackendEntree = () => import("@/views/backend/products/entree.vue");
 // Backend: e-Learning
 const BackendElearningCourses = () =>
   import("@/views/backend/elearning/CoursesView.vue");
@@ -535,9 +536,9 @@ const routes = [
             component: BackendValprix,
           },
           {
-            path: "buttons",
-            name: "backend-elements-buttons",
-            component: BackendElementsButtons,
+            path: "entree",
+            name: "backend-elements-entree",
+            component: BackendEntree,
           },
           {
             path: "button-groups",

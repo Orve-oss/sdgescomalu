@@ -16,10 +16,7 @@ class Produit extends Model
 
     protected $table = 'produits';
 
-    public function fournisseur()
-    {
-        return $this->belongsTo(Fournisseur::class);
-    }
+
 
     public function categorie()
     {
@@ -27,7 +24,7 @@ class Produit extends Model
     }
     public static function getAllProduits()
     {
-        return Self::all()->load('fournisseur', 'categorie');
+        return Self::all()->load('categorie');
         // ->with('fournisseur', 'categorie');
         // return Self::latest()->get();
     }
@@ -38,7 +35,7 @@ class Produit extends Model
         $produit->designation = $data['designation'];
 
         $produit->Actif = $data['Actif'];
-        $produit->fournisseur_id = $data['fournisseur_id'];
+
         $produit->categorie_id = $data['categorie_id'];
         $produit->save();
     }
@@ -59,7 +56,7 @@ class Produit extends Model
             'designation' => $data['designation'],
 
             'Actif' => $data['Actif'],
-            'fournisseur_id' => $data['fournisseur_id'],
+            
             'categorie_id' => $data['categorie_id'],
         ]);
     }

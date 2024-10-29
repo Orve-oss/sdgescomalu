@@ -56,7 +56,7 @@ export default {
     },
     {
         name: "Produits",
-        icon: "si si-user",
+        icon: "si si-grid",
         subActivePaths: "/backend/produits",
         sub: [
           {
@@ -70,6 +70,14 @@ export default {
           {
             name: "Valeur des produits",
             to: "backend-elements-valprix",
+          },
+        //   {
+        //     name: "Fournisseurs",
+        //     to: "backend-elements-valprix",
+        //   },
+          {
+            name: "Entree en Stock",
+            to: "backend-elements-entree",
           },
         ],
       },

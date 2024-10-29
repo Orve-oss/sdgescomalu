@@ -21,7 +21,6 @@ class ProduitFactory extends Factory
         return [
             'designation' => $this->faker->word(),
             'Actif' => $this->faker->boolean(),
-            'fournisseur_id' => Fournisseur::factory(), // Associe à un fournisseur existant
             'categorie_id' => Categorie::factory(),       // Associe à une catégorie existante deja
         ];
     }

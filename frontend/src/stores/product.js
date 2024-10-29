@@ -17,7 +17,7 @@ export const useproduitstore = defineStore("produit", {
         newProduit: {
             designation: "",
             Actif: "",
-            fournisseur_id: "",
+
             categorie_id: "",
 
         },
@@ -53,16 +53,7 @@ export const useproduitstore = defineStore("produit", {
             }
         },
 
-        async getFournisseur(){
-            try {
-                const response = await axios.get(
-                    `http://sdgescomalu.test/api/fournisseurs`
-                );
-                this.produits.allfournisseur = response.data.fournisseur;
-            } catch (error) {
-                console.log(error);
-            }
-        },
+
         async addProduit(data) {
             try {
                 this.produits.data = [];
@@ -71,7 +62,7 @@ export const useproduitstore = defineStore("produit", {
                     designation: data.designation,
 
                     Actif: data.Actif,
-                    fournisseur_id: data.fournisseur_id,
+
                     categorie_id: data.categorie_id,
                 });
                 toast.success("Produit cree avec succes", {
@@ -93,7 +84,7 @@ export const useproduitstore = defineStore("produit", {
         clearProduit(){ //reinitialiser les attributs
             this.newProduit.designation = "",
             this.newProduit.Actif = "",
-            this.newProduit.fournisseur_id = "",
+
             this.newProduit.categorie_id = ""
         },
 
@@ -105,7 +96,7 @@ export const useproduitstore = defineStore("produit", {
                 this.newProduit.designation = data.data.Produit.designation
 
                 this.newProduit.Actif = data.data.Produit.Actif
-                this.newProduit.fournisseur_id = data.data.Produit.fournisseur_id
+
                 this.newProduit.categorie_id = data.data.Produit.categorie_id
 
             }
@@ -123,7 +114,7 @@ export const useproduitstore = defineStore("produit", {
                     designation: data.designation,
 
                     Actif: data.Actif,
-                    fournisseur_id: data.fournisseur_id,
+                   
                     categorie_id: data.categorie_id,
                 });
                 if (resp.data.message) {

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('designation');
             $table->boolean('Actif')->default(1);
-            $table->foreignId('fournisseur_id')->constrained('fournisseurs');
+            // $table->foreignId('fournisseur_id')->constrained('fournisseurs');
             $table->foreignId('categorie_id')->constrained('categories');
 
             $table->timestamps();

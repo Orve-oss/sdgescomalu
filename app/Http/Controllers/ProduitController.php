@@ -42,7 +42,7 @@ class ProduitController extends Controller
             'designation'=>'required',
 
             'Actif'=>'nullable',
-            'fournisseur_id'=>'required',
+
             'categorie_id'=>'required',
         ]);
         Produit::addProduit($data);
@@ -75,7 +75,7 @@ class ProduitController extends Controller
             'designation'=>'nullable',
 
             'Actif'=>'nullable',
-            'fournisseur_id'=>'nullable',
+            
             'categorie_id'=>'nullable',
         ]);
         Produit::updateProduit($data, $id);

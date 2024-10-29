@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { reactive, onMounted } from "vue";
 import { useValprixStore } from "@/stores/valprix";
 // import { toast } from "vue3-toastify";
 // import "vue3-toastify/dist/index.css";
@@ -9,8 +9,7 @@ const valprixStore = useValprixStore();
 
 onMounted(() => {
     valprixStore.getCategorie();
-    valprixStore.getDefprix();
-    valprixStore.getValprix();
+
 })
 // Example data
 const produits = reactive([
@@ -21,28 +20,6 @@ const produits = reactive([
 
 ]);
 
-const produit = ref([
-    {
-        label: "Designation",
-        field: "produit.designation",
-    },
-    {
-        label: "Definition de prix",
-        field: "defprix.nom",
-    },
-    {
-        label: "Prix",
-        field: "pvte",
-    },
-
-    {
-        label: "Act",
-        field: "Action",
-    },
-]);
-
-const searchTerm = ref("");
-
 
 const clicko = (data) => {
     valprixStore.designation = data.designation;
@@ -50,45 +27,8 @@ const clicko = (data) => {
     console.log(data);
 
 };
-const addprix = () => {
-    let Index = valprixStore.getIndexListePrix(valprixStore.produit_id);
-    console.log(Index);
-    console.log(valprixStore.produit_id);
-    if (Index >= 0) {
-        const id = valprixStore.Valprix.data[Index].id;
-        let pvte = valprixStore.pvte;
-        valprixStore.updateprix(id, pvte);
-        console.log(valprixStore.Valprix.data[Index].id);
-        console.log(valprixStore.pvte);
 
 
-    } else {
-        valprixStore.valprix({
-            produit_id: valprixStore.produit_id,
-            defprix_id: valprixStore.defprix_id,
-            pvte: valprixStore.pvte
-        })
-    }
-
-}
-/**
- *
- * const addprix = () => {
- *     let Index = valprixStore.getIndexListePrix(valprixStore.produit_id, valprixStore.defprix_id);
- *     if (Index >= 0) {
- *         const id = valprixStore.Valprix.data[Index].id;
- *         let pvte = valprixStore.pvte;
- *         valprixStore.updateprix(id, pvte);
- *     } else {
- *         valprixStore.valprix({
- *             produit_id: valprixStore.produit_id,
- *             defprix_id: valprixStore.defprix_id,
- *             pvte: valprixStore.pvte
- *         })
- *     }
- * }
- *
-*/
 </script>
 
 <template>
@@ -132,21 +72,27 @@ const addprix = () => {
                 <BaseBlock title="Detail">
                     <div class="mb-4">
                         <select class="form-select" id="example-select" name="example-select"
-                            v-model="valprixStore.defprix_id">
+                           >
                             <option selected>Open this select menu</option>
-                            <option v-for="defprix in valprixStore.defprix.data" :key="defprix.id" :value="defprix.id">
-                                {{
-                                    defprix.nom }}</option>
 
                         </select>
                     </div>
                     <div class="row">
 
-                        <div class="col-4">
+                        <div class="col-4 me-0">
                             <BaseBlock class="bg-body-dark mb-2">
                                 <p>{{ valprixStore.designation }}</p>
                             </BaseBlock>
+                            <BaseBlock class="bg-body-light mb-2">
+                                <p></p>
+                            </BaseBlock>
+                        
                         </div>
+                        <!-- <div class="col-3">
+                            <BaseBlock class="bg-body-light mb-2">
+                                <p></p>
+                            </BaseBlock>
+                        </div> -->
 
                         <div class="col-lg-5 col-xl-3">
                             <div class="form mb-1">
@@ -158,7 +104,7 @@ const addprix = () => {
                         <div class="col-lg-5 col-xl-3">
                             <div class="row items-push text-center text-sm-start mb-0">
                                 <div class="col-sm-6 col-xl-4 me-3">
-                                    <button type="button" @click="addprix" class="btn rounded-0 btn-dark">
+                                    <button type="button" class="btn rounded-0 btn-dark">
                                         Valider
                                     </button>
                                 </div>
@@ -172,7 +118,7 @@ const addprix = () => {
                         </div>
                     </div>
                 </BaseBlock>
-                <vue-good-table :columns="produit" :rows="valprixStore.Valprix.data" styleClass="vgt-table mt-3 "
+                <!-- <vue-good-table styleClass="vgt-table mt-3 "
                     max-heigth="500px" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);" max-width="100%"
                     :fixed-header="true" theme="black-rhino">
                     <template v-slot:table-row="props">
@@ -185,7 +131,7 @@ const addprix = () => {
                             </button>
                         </span>
                     </template>
-                </vue-good-table>
+                </vue-good-table> -->
             </div>
         </div>
     </div>

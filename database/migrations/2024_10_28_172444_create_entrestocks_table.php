@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fournisseurs', function (Blueprint $table) {
+        Schema::create('entrestocks', function (Blueprint $table) {
             $table->id();
-            $table->string('rais_soc');
-            $table->string('adresse');
-            $table->string('telephone');
-            $table->string('email')->unique();
-            $table->boolean('Actif')->default(1);
-            $table->foreignId('defprix_id')->nullable()->constrained('defprixes');
+            $table->string('qte');
+            $table->foreignId('fournisseur_id')->constrained('fournisseurs');
+            $table->foreignId('produit_id')->constrained('produits');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fournisseurs');
+        Schema::dropIfExists('entrestocks');
     }
 };
