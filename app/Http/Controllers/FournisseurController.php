@@ -28,7 +28,7 @@ class FournisseurController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function ajouter(Request $request)
     {
         $data = $request->validate([
             'rais_soc'=>'required',
@@ -36,17 +36,19 @@ class FournisseurController extends Controller
             'telephone'=>'required',
             'adresse'=>'required',
             'Actif'=>'required',
+            'defprix_id'=>'required',
         ]);
         $fournisseur = Fournisseur::addFournisseur($data);
-        return response()->json($fournisseur);
+        return response()->json(['fournisseur'=> $fournisseur]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Fournisseur $fournisseur)
+    public function show($id)
     {
-        return response()->json($fournisseur);
+        $fournisseur = Fournisseur::getFournisseur($id);
+        return response()->json(['fournisseur'=> $fournisseur]);
     }
 
     /**
@@ -60,16 +62,17 @@ class FournisseurController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Fournisseur $fournisseur)
+    public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'rais_soc'=>'required',
-            'email'=>'required',
-            'telephone'=>'required',
-            'Adresse'=>'required',
-            'Actif'=>'required',
+            'rais_soc'=>'nullable',
+            'email'=>'nullable',
+            'telephone'=>'nullable',
+            'adresse'=>'nullable',
+            'Actif'=>'nullable',
+            'defprix_id'=>'nullable',
         ]);
-        $fournisseur = Fournisseur::updateFournisseur($data, $fournisseur->id);
+        $fournisseur = Fournisseur::updateFournisseur($data, $id);
         return response()->json($fournisseur);
     }
 

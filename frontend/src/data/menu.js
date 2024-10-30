@@ -71,10 +71,10 @@ export default {
             name: "Valeur des produits",
             to: "backend-elements-valprix",
           },
-        //   {
-        //     name: "Fournisseurs",
-        //     to: "backend-elements-valprix",
-        //   },
+          {
+            name: "Fournisseurs",
+            to: "backend-elements-fournisseurs",
+          },
           {
             name: "Entree en Stock",
             to: "backend-elements-entree",

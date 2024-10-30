@@ -40,7 +40,10 @@ Route::post('/categories/store', [CategorieController::class, 'store']);
 
 
 Route::get('/fournisseurs', [FournisseurController::class, 'liste']);
-// Route::post('/fournisseurs/store', [FournisseurController::class, 'store']);
+Route::post('/fournisseurs/ajouter', [FournisseurController::class, 'ajouter']);
+Route::get('/fournisseurs/show/{id}', [FournisseurController::class, 'show']);
+Route::put('/fournisseurs/editer/{id}', [FournisseurController::class, 'update']);
+Route::delete('/fournisseurs/supprimer/{id}', [FournisseurController::class, 'destroy']);
 
 Route::get('/produits', [ProduitController::class, 'index']);
 Route::post('/produits/add', [ProduitController::class, 'add']);

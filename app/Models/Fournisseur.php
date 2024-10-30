@@ -11,17 +11,16 @@ class Fournisseur extends Model
 
     protected $fillable = [
         'rais_soc',
-        'adresse',
-        'email',
         'telephone',
         'Actif',
+        'defprix_id',
 
     ];
 
 
-    public function produits()
+    public function defprix()
     {
-        return $this->hasMany(Produit::class);
+        return $this->belongsTo(Defprix::class);
     }
 
     public static function getAllFournisseurs()
@@ -37,6 +36,7 @@ class Fournisseur extends Model
         $fournisseur->email = $data['email'];
         $fournisseur->telephone = $data['telephone'];
         $fournisseur->Actif = $data['Actif'];
+        $fournisseur->defprix_id = $data['defprix_id'];
         $fournisseur->save();
     }
 
@@ -53,6 +53,7 @@ class Fournisseur extends Model
             'email' => $data['email'],
             'telephone' => $data['telephone'],
             'Actif' => $data['Actif'],
+            'defprix_id' => $data['defprix_id'],
         ]);
     }
 
